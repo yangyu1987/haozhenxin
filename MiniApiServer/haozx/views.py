@@ -232,11 +232,7 @@ def resGet(name,idCard,phoneNum,token):
         # 已有缓存数据 时间不超过1个月
         if sql_res.result and timeCheckForCookie(sql_res.timestamp, 30):
             # 暴露结果
-            msg_res = {
-                'success': 1,
-                'data': sql_res.result
-            }
-            return csrfJsonRes(HttpResponse, msg_res)
+            return csrfJsonRes(HttpResponse, sql_res.result)
 
             # 没有缓存数据或缓存时间大于一个月去接口查询
         else:
@@ -312,7 +308,7 @@ def resGet(name,idCard,phoneNum,token):
                     parse_res(res_dic, new_res, 'longLoanApply')
                     parse_res(res_dic, new_res, 'suspectFraud')
 
-                sql_res.result = json.dumps(new_res)
+                sql_res.result = new_res
                 # 更新验证码为已用
                 sql_res.codeUsed = 1
                 sql_res.timestamp = int(time.time() * 1000)

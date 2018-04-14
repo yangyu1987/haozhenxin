@@ -83,11 +83,10 @@ def zx_test(name,idCard,mobile,servicename,post_url):
 
 def csrfJsonRes(HttpResponse,msg_res):
     # 
-    response = HttpResponse(json.dumps(msg_res))
+    response = HttpResponse(json.dumps(msg_res)) if isinstance(msg_res,dict) else HttpResponse(msg_res)
     response['Content-Type'] = "application/json"
     response['Access-Control-Allow-Origin'] = "*"
     return response
 
 if __name__ == "__main__":
-    old = '1523587852000'
-    print(timeCheckForToken(old,26))
+    pass

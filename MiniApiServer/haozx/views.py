@@ -308,7 +308,7 @@ def resGet(name,idCard,phoneNum,token):
                     parse_res(res_dic, new_res, 'longLoanApply')
                     parse_res(res_dic, new_res, 'suspectFraud')
 
-                sql_res.result = new_res
+                sql_res.result = json.dumps(new_res)
                 # 更新验证码为已用
                 sql_res.codeUsed = 1
                 sql_res.timestamp = int(time.time() * 1000)
